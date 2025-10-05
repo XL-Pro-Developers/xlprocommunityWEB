@@ -1,12 +1,13 @@
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { getServerSupabase } from "@/lib/supabase/server";
-import Lightning from "@/components/lightning";
+import LightningWrapper from "@/components/LightningWrapper";
 import DecryptedText from "@/components/DecryptedText";
 import TextType from "@/components/TextType";
 
 export default async function HomePage() {
   const supabase = getServerSupabase();
+
   const [{ count: membersCount }, { count: eventsCount }] = await Promise.all([
     supabase.from("members").select("id", { count: "exact", head: true }),
     supabase.from("events").select("id", { count: "exact", head: true }),
@@ -18,9 +19,8 @@ export default async function HomePage() {
 
       {/* Hero Section */}
       <section className="relative mx-auto max-w-6xl px-4 pb-16 pt-20">
-        <div className="pointer-events-none absolute inset-0 -z-10 hidden lg:block">
-          <Lightning hue={230} speed={1} intensity={0.9} size={1.0} />
-        </div>
+        {/* Lightning Background (client-only, large screens) */}
+        <LightningWrapper />
 
         <div className="mx-auto max-w-3xl text-center space-y-6">
           {/* Typing Header */}
@@ -34,20 +34,20 @@ export default async function HomePage() {
               typingSpeed={50}
               deletingSpeed={40}
               pauseDuration={2000}
-              showCursor={true}
+              showCursor
               cursorCharacter="_"
-              loop={true}
+              loop
             />
           </h1>
 
           {/* Hover-Decrypted Text */}
           <DecryptedText
-          text="XL Pro Community is a developer collective pushing boundaries with code, hardware, and product thinking. Join a league of builders who ship fast, collaborate, and level up together."
-          animateOn="hover"
-          className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl"
-          encryptedClassName="text-muted-foreground/50 text-lg md:text-xl leading-relaxed max-w-2xl"
-          parentClassName="block"
-        />
+            text="XL Pro Community is a developer collective pushing boundaries with code, hardware, and product thinking. Join a league of builders who ship fast, collaborate, and level up together."
+            animateOn="hover"
+            className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
+            encryptedClassName="text-muted-foreground/50 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
+            parentClassName="block"
+          />
 
           {/* CTA Buttons */}
           <div className="mt-8 flex items-center justify-center gap-3">
