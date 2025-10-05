@@ -19,9 +19,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        {/* Brand */}
+        {/* Brand with Logo */}
         <Link href="/" className="group inline-flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-(--color-chart-2) shadow-[0_0_16px] shadow-(--color-chart-2)" />
+          <img
+            src="https://oekyvgwbhszuceneipak.supabase.co/storage/v1/object/public/logo/edited-photo.png"
+            alt="XL Pro Community Logo"
+            className="h-8 w-8 object-contain"
+          />
           <span className="font-mono text-sm tracking-wide text-foreground">XL Pro Community</span>
         </Link>
 
