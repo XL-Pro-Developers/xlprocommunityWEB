@@ -8,7 +8,13 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { AdminRegistrationsPanel } from "@/components/admin-registrations-panel"
 
-export function AdminDashboardClient() {
+export function AdminDashboardClient({
+  membersCount = 0,
+  activeEventsCount = 0,
+}: {
+  membersCount?: number
+  activeEventsCount?: number
+}) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex items-center justify-between">
@@ -22,8 +28,8 @@ export function AdminDashboardClient() {
 
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         {[
-          { k: "Members", v: "64" },
-          { k: "Active Events", v: "2" },
+          { k: "Members", v: String(membersCount) },
+          { k: "Active Events", v: String(activeEventsCount) },
           { k: "Registrations", v: "120" },
         ].map((s) => (
           <div key={s.k} className="rounded-xl border border-border/60 bg-secondary/20 p-5">

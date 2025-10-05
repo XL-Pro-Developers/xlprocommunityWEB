@@ -1,7 +1,14 @@
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
+import { getServerSupabase } from "@/lib/supabase/server"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = getServerSupabase()
+  const [{ count: membersCount }, { count: eventsCount }] = await Promise.all([
+    supabase.from("members").select("id", { count: "exact", head: true }),
+    supabase.from("events").select("id", { count: "exact", head: true }),
+  ])
+
   return (
     <main>
       <SiteHeader />
@@ -29,8 +36,8 @@ export default function HomePage() {
 
       <section className="mx-auto grid max-w-6xl gap-6 px-4 pb-20 md:grid-cols-3">
         {[
-          { k: "Members", v: "64+" },
-          { k: "Events Hosted", v: "25+" },
+          { k: "Members", v: String(membersCount ?? 0) },
+          { k: "Events Hosted", v: String(eventsCount ?? 0) },
           { k: "Departments", v: "6" },
         ].map((s) => (
           <div
