@@ -31,9 +31,9 @@ export default async function HomePage() {
                 "Build. Learn. Ship. Together",
                 "Ship Ideas, Not Just Code.",
               ]}
-              typingSpeed={50}
-              deletingSpeed={40}
-              pauseDuration={2000}
+              typingSpeed={30}
+              deletingSpeed={35}
+              pauseDuration={3000}
               showCursor
               cursorCharacter="_"
               loop
