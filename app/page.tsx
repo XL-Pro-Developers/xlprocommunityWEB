@@ -2,6 +2,8 @@ import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
 import { getServerSupabase } from "@/lib/supabase/server"
 import Lightning from "@/components/lightning"
+import DecryptedText from "@/components/DecryptedText"
+import TextType from "@/components/TextType"
 
 export default async function HomePage() {
   const supabase = getServerSupabase()
@@ -18,11 +20,22 @@ export default async function HomePage() {
           <Lightning hue={230} speed={1} intensity={0.9} size={1.0} />
         </div>
         <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-balance bg-[linear-gradient(90deg,#00D0FF,#8A6CFF)] bg-clip-text text-5xl font-semibold text-transparent md:text-6xl">
-            Build. Learn. Ship. Together.
-          </h1>
+          <TextType
+            as="h1"
+            className="text-balance bg-[linear-gradient(90deg,#00D0FF,#8A6CFF)] bg-clip-text text-5xl font-semibold text-transparent md:text-6xl"
+            text={["Build. Learn. Ship. Together."]}
+            typingSpeed={75}
+            pauseDuration={1500}
+            showCursor={true}
+            cursorCharacter="|"
+          />
           <p className="mt-4 text-pretty text-muted-foreground">
-            A dark, futuristic hub for the XL Pro Developer Community — sleek, fast, and collaborative.
+            <DecryptedText
+              text="A dark, futuristic hub for the XL Pro Developer Community — sleek, fast, and collaborative."
+              animateOn="view"
+              revealDirection="center"
+              sequential={true}
+            />
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <a href="/members">
