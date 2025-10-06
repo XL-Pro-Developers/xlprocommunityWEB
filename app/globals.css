@@ -128,3 +128,12 @@
     position: relative;
   }
 }
+@media (max-width: 1024px) {
+  .chroma-fade,
+  .chroma-overlay {
+    display: none; /* remove gray overlay */
+  }
+  .chroma-card {
+    background: var(--card-gradient); /* colorful by default */
+  }
+}
