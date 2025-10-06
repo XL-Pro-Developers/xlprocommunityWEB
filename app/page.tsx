@@ -78,7 +78,7 @@ export default async function HomePage() {
                   {[
                     { k: "Members", v: membersCount ?? 0 },
                     { k: "Events Hosted", v: eventsCount ?? 0 },
-                    { k: "Departments", v: 6 },
+                    { k: "Participants", v: 280 },
                   ].map((stat) => (
                     <div
                       key={stat.k}

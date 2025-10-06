@@ -20,7 +20,10 @@ export function AdminDashboardClient({
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
         <form action={logoutAdmin}>
-          <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 bg-transparent">
+          <Button
+            variant="outline"
+            className="border-primary/50 text-primary hover:bg-primary/10 bg-transparent"
+          >
             Log out
           </Button>
         </form>
@@ -32,7 +35,10 @@ export function AdminDashboardClient({
           { k: "Active Events", v: String(activeEventsCount) },
           { k: "Registrations", v: "120" },
         ].map((s) => (
-          <div key={s.k} className="rounded-xl border border-border/60 bg-secondary/20 p-5">
+          <div
+            key={s.k}
+            className="rounded-xl border border-border/60 bg-secondary/20 p-5"
+          >
             <p className="text-sm text-muted-foreground">{s.k}</p>
             <p className="mt-2 text-2xl font-semibold text-primary">{s.v}</p>
           </div>
@@ -40,6 +46,7 @@ export function AdminDashboardClient({
       </div>
 
       <Tabs defaultValue="members" className="mt-8">
+        {/* Tabs navigation */}
         <TabsList>
           <TabsTrigger value="members">Members</TabsTrigger>
           <TabsTrigger value="events">Events</TabsTrigger>
@@ -47,6 +54,7 @@ export function AdminDashboardClient({
           <TabsTrigger value="registrations">Registrations</TabsTrigger>
         </TabsList>
 
+        {/* Members tab */}
         <TabsContent value="members" className="mt-6">
           <div className="grid gap-4 rounded-xl border border-border/60 bg-secondary/10 p-4">
             <h2 className="font-medium">Add Member</h2>
@@ -63,7 +71,6 @@ export function AdminDashboardClient({
                   defaultValue="Member"
                   className="h-10 rounded-md border border-input bg-background px-3 text-sm"
                 >
-                  <option value="Lead">Lead</option>
                   <option value="Member">Member</option>
                   <option value="Alumni">Alumni</option>
                 </select>
@@ -90,7 +97,11 @@ export function AdminDashboardClient({
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="linkedin_url">LinkedIn URL</Label>
-                <Input id="linkedin_url" name="linkedin_url" placeholder="https://linkedin.com/in/..." />
+                <Input
+                  id="linkedin_url"
+                  name="linkedin_url"
+                  placeholder="https://linkedin.com/in/..."
+                />
               </div>
               <div className="grid gap-2 md:col-span-2">
                 <Label htmlFor="bio">Bio</Label>
@@ -107,6 +118,7 @@ export function AdminDashboardClient({
           </div>
         </TabsContent>
 
+        {/* Events tab */}
         <TabsContent value="events" className="mt-6">
           <div className="grid gap-4 rounded-xl border border-border/60 bg-secondary/10 p-4">
             <h2 className="font-medium">Create Event</h2>
@@ -117,14 +129,12 @@ export function AdminDashboardClient({
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="starts_at">Date/Time</Label>
-                <input
+                <Input
                   id="starts_at"
                   name="starts_at"
                   type="datetime-local"
                   required
-                  step="60"
-                  autoComplete="off"
-                  className="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-10 w-full min-w-0 rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  step={60}
                 />
               </div>
               <div className="grid gap-2">
@@ -145,7 +155,7 @@ export function AdminDashboardClient({
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="price">Price per Member (₹)</Label>
-                <Input id="price" name="price" type="number" placeholder="60" defaultValue="60" />
+                <Input id="price" name="price" type="number" placeholder="60" defaultValue={60} />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="payment_qr">Payment QR Code</Label>
@@ -166,6 +176,7 @@ export function AdminDashboardClient({
           </div>
         </TabsContent>
 
+        {/* Chat tab */}
         <TabsContent value="chat" className="mt-6">
           <div className="rounded-xl border border-border/60 bg-secondary/10 p-4">
             <h2 className="font-medium">Chat Moderation</h2>
@@ -175,6 +186,7 @@ export function AdminDashboardClient({
           </div>
         </TabsContent>
 
+        {/* Registrations tab */}
         <TabsContent value="registrations" className="mt-6">
           <div className="rounded-xl border border-border/60 bg-secondary/10 p-4">
             <AdminRegistrationsPanel />
