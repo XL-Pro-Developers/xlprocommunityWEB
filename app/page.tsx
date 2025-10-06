@@ -1,9 +1,10 @@
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { getServerSupabase } from "@/lib/supabase/server";
-import LightningWrapper from "@/components/LightningWrapper";
+// import LightningWrapper from "@/components/LightningWrapper";
 import DecryptedText from "@/components/DecryptedText";
 import TextType from "@/components/TextType";
+import PixelBlastWrapper from "@/components/PixelBlastWrapper";
 
 export default async function HomePage() {
   const supabase = getServerSupabase();
@@ -19,10 +20,13 @@ export default async function HomePage() {
 
       {/* Hero Section */}
       <section className="relative mx-auto max-w-6xl px-4 pb-16 pt-20">
-        {/* Lightning Background (client-only, large screens) */}
-        <LightningWrapper />
+        {/* Lightning Background (commented out) */}
+        {/* <LightningWrapper /> */}
 
-        <div className="mx-auto max-w-3xl text-center space-y-6">
+        {/* PixelBlast Background */}
+        <PixelBlastWrapper />
+
+        <div className="mx-auto relative max-w-3xl text-center space-y-6">
           {/* Typing Header */}
           <h1 className="text-balance bg-[linear-gradient(90deg,#00D0FF,#8A6CFF)] bg-clip-text text-5xl font-semibold text-transparent md:text-6xl">
             <TextType
@@ -68,22 +72,41 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="mx-auto grid max-w-6xl gap-6 px-4 pb-20 md:grid-cols-3">
-        {[
-          { k: "Members", v: String(membersCount ?? 0) },
-          { k: "Events Hosted", v: String(eventsCount ?? 0) },
-          { k: "Departments", v: "6" },
-        ].map((s) => (
-          <div
-            key={s.k}
-            className="rounded-xl border border-border/60 bg-secondary/20 p-6 shadow-[0_0_24px_rgba(0,208,255,0.08)]"
-          >
-            <p className="text-sm text-muted-foreground">{s.k}</p>
-            <p className="mt-2 text-3xl font-semibold text-primary">{s.v}</p>
-          </div>
-        ))}
-      </section>
+   {/* Stats Section */}
+         
+                <section className="mx-auto grid max-w-6xl gap-8 px-4 pb-20 md:grid-cols-3">
+                  {[
+                    { k: "Members", v: membersCount ?? 0 },
+                    { k: "Events Hosted", v: eventsCount ?? 0 },
+                    { k: "Departments", v: 6 },
+                  ].map((stat) => (
+                    <div
+                      key={stat.k}
+                      className={`
+                        rounded-xl border border-border/60 bg-secondary/50 p-6
+                        shadow-[0_0_24px_rgba(0,208,255,0.12)] backdrop-blur-md opacity-90
+                        hover:shadow-[0_0_40px_rgba(0,208,255,0.2)] transition-shadow duration-300
+                        relative overflow-hidden text-center
+                      `}
+                    >
+                      {/* Header */}
+                      <p className="text-sm font-medium uppercase text-muted-foreground tracking-wider">
+                        {stat.k}
+                      </p>
+                      
+                      {/* Value */}
+                      <p className="mt-4 text-3xl md:text-4xl font-extrabold text-primary">
+                        {stat.v}
+                      </p>
+                      
+                      {/* Decorative Glow Circles */}
+                      <div className="absolute -top-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+                      <div className="absolute -bottom-6 -right-6 w-28 h-28 bg-[#8A6CFF]/20 rounded-full blur-3xl pointer-events-none" />
+                    </div>
+                  ))}
+                </section>
+                
+          
 
       {/* About Section */}
       <section className="mx-auto max-w-4xl px-4 pb-24 text-center">

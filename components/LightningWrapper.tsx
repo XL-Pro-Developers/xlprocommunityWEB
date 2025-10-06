@@ -8,7 +8,7 @@ const Lightning = dynamic(() => import("./lightning"), { ssr: false });
 export default function LightningWrapper() {
   return (
     <div className="hidden lg:block pointer-events-none absolute inset-0 -z-10">
-      <Lightning hue={230} speed={1} intensity={0.9} size={1.0} />
+      <Lightning hue={120} /> 
     </div>
   );
 }
