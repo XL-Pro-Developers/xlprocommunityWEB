@@ -2,7 +2,6 @@ Perfect! I can update the README.md to include the **live deployment link**, hig
 
 ---
 
-```markdown
 # XLPro Community Website
 
 ## Project Overview
@@ -62,11 +61,10 @@ In many developer communities, knowledge sharing and collaboration often lack st
 
 ## Architecture
 
-```
+
 
 Frontend (React)  <--->  Backend API (Node.js + Express)  <--->  Database (PostgreSQL/MySQL)
 
-````
 
 - Frontend handles UI, routing, and API requests.
 - Backend manages authentication, database queries, and business logic.
@@ -175,11 +173,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 * **Email:** [adarshas.work@gmail.com](adarshas.work@gmail.com)
 * **Live Website:** [https://xlprocommunity.in](https://github.com/XL-Pro-Developers/xlprocommunityWEB)
 
-```
-
----
-
-If you want, I can **also create a super “GitHub showcase version”** of this README with badges, live demo buttons, tech stack icons, and a prettier layout that really stands out on your repo page.  
-
-Do you want me to do that next?
 ```
