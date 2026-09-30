@@ -30,7 +30,7 @@ const DEFAULT_EVENTS: DbEvent[] = [
     location: "SIT Campus, Mangaluru",
     speaker: "XL Pro Mentors",
     poster_url: "/codeathon3-banner.png",
-    starts_at: "2026-10-05T09:00:00Z",
+    starts_at: "2026-10-06T09:00:00Z",
     link: "https://codeathon-2026.xlprodevelopers.workers.dev",
   },
 ]
