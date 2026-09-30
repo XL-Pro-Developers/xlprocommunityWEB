@@ -7,12 +7,22 @@ import TextType from "@/components/TextType";
 import PixelBlastWrapper from "@/components/PixelBlastWrapper";
 
 export default async function HomePage() {
-  const supabase = getServerSupabase();
+  let membersCount = 0;
+  let eventsCount = 0;
 
-  const [{ count: membersCount }, { count: eventsCount }] = await Promise.all([
-    supabase.from("members").select("id", { count: "exact", head: true }),
-    supabase.from("events").select("id", { count: "exact", head: true }),
-  ]);
+  try {
+    const supabase = getServerSupabase();
+    if (supabase) {
+      const [{ count: mCount }, { count: eCount }] = await Promise.all([
+        supabase.from("members").select("id", { count: "exact", head: true }),
+        supabase.from("events").select("id", { count: "exact", head: true }),
+      ]);
+      if (typeof mCount === "number") membersCount = mCount;
+      if (typeof eCount === "number") eventsCount = eCount;
+    }
+  } catch (err) {
+    console.warn("HomePage count fetch fallback:", err);
+  }
 
   return (
     <main>

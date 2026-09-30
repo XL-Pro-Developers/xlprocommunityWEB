@@ -1,5 +1,6 @@
 import { cookies } from "next/headers"
 import { createServerClient } from "@supabase/ssr"
+import { createFallbackSupabaseClient } from "./mock"
 
 let _serverClient: ReturnType<typeof createServerClient> | null = null
 
@@ -9,9 +10,7 @@ export function getSupabaseServer() {
   const anon = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (!url || !anon) {
-    throw new Error(
-      "Missing Supabase environment variables. Expected SUPABASE_URL and SUPABASE_ANON_KEY (or NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY for local dev).",
-    )
+    return createFallbackSupabaseClient()
   }
 
   const cookieStore = cookies()

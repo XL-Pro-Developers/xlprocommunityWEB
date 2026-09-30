@@ -1,6 +1,7 @@
 "use client"
 
 import { createBrowserClient } from "@supabase/ssr"
+import { createFallbackSupabaseClient } from "./mock"
 
 let _client: ReturnType<typeof createBrowserClient> | null = null
 
@@ -11,9 +12,7 @@ export function getSupabaseBrowser() {
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (!url || !anon) {
-    throw new Error(
-      "Missing Supabase environment variables. Please ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set in your .env.local file or Vercel environment variables.",
-    )
+    return createFallbackSupabaseClient()
   }
 
   _client = createBrowserClient(url, anon)
