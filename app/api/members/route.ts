@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { getServerSupabase } from "@/lib/supabase/server"
 
 export async function GET() {
-  const supabase = getServerSupabase()
+  const supabase = await getServerSupabase()
   const { data, error } = await supabase
     .from("members")
     .select("id,name,role,avatar_url,skills,bio,created_at")

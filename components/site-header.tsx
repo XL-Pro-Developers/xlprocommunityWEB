@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { Menu } from "lucide-react";
+import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 const nav = [
   { href: "/", label: "Home" },
@@ -16,6 +18,25 @@ const nav = [
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const supabase = getSupabaseBrowser();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+    };
+    checkAuth();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [supabase]);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -47,6 +68,16 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          
+          {isAuthenticated ? (
+            <Link href="/members/profile">
+              <Button variant="outline" size="sm" className="ml-4">My Profile</Button>
+            </Link>
+          ) : (
+            <Link href="/auth/login">
+              <Button variant="default" size="sm" className="ml-4">Member Login</Button>
+            </Link>
+          )}
         </nav>
 
         {/* Mobile nav */}
@@ -80,6 +111,18 @@ export function SiteHeader() {
                     </DrawerClose>
                   );
                 })}
+                
+                <DrawerClose asChild>
+                  {isAuthenticated ? (
+                    <Link href="/members/profile">
+                      <Button variant="outline" className="w-full mt-4">My Profile</Button>
+                    </Link>
+                  ) : (
+                    <Link href="/auth/login">
+                      <Button variant="default" className="w-full mt-4">Member Login</Button>
+                    </Link>
+                  )}
+                </DrawerClose>
               </div>
             </DrawerContent>
           </Drawer>

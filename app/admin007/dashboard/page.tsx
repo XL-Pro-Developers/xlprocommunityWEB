@@ -6,7 +6,7 @@ import { getServerSupabase } from "@/lib/supabase/server"
 export default async function AdminDashboardPage() {
   await requireAdminOrRedirect()
 
-  const supabase = getServerSupabase()
+  const supabase = await getServerSupabase()
   const [{ count: membersCount }, { count: activeEventsCount }] = await Promise.all([
     supabase.from("members").select("id", { count: "exact", head: true }),
     supabase

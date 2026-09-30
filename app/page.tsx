@@ -11,7 +11,7 @@ export default async function HomePage() {
   let eventsCount = 0;
 
   try {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     if (supabase) {
       const [{ count: mCount }, { count: eCount }] = await Promise.all([
         supabase.from("members").select("id", { count: "exact", head: true }),

@@ -10,7 +10,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     return NextResponse.json({ error: "Missing fields" }, { status: 400 })
   }
 
-  const supabase = getServerSupabase()
+  const supabase = await getServerSupabase()
   const { error } = await supabase.from("event_registrations").insert({
     event_id: eventId,
     name,

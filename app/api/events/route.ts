@@ -21,7 +21,7 @@ const DEFAULT_EVENTS = [
 
 export async function GET() {
   try {
-    const supabase = getServerSupabase()
+    const supabase = await getServerSupabase()
     if (!supabase) {
       return NextResponse.json({ events: DEFAULT_EVENTS })
     }

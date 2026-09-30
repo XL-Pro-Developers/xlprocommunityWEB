@@ -11,7 +11,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 })
     }
 
-    const supabase = getServerSupabase()
+    const supabase = await getServerSupabase()
     const insert = {
       event_id: event_id ?? null,
       team_name,
